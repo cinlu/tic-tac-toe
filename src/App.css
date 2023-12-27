@@ -1,6 +1,9 @@
 .footer-message {
     text-align: center;
     color: skyblue; 
-    font-size: small;
+    font-size: medium;
     margin-top: 15px;
+}
+a {
+    color: skyblue;
 }
