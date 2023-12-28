@@ -37,6 +37,7 @@ function TicTacToe() {
             return 0; 
         }
 
+        //update board
         const updatedBoard = board.map((value, i) => {
             if (i === index) {
                 return count % 2 == 0 ? "x" : "o"; 
@@ -45,6 +46,12 @@ function TicTacToe() {
             }
         })
 
+        setBoard(updatedBoard);
+
+        //update active player
+        setCount(count + 1); 
+
+        //update active player message and game board UI
         if (count % 2 == 0) {
             titleRef.current.innerHTML = "it's O's turn now";
             e.target.innerHTML = `<img src='${cross}'>`;
@@ -52,9 +59,8 @@ function TicTacToe() {
             titleRef.current.innerHTML = "it's X's turn now";
             e.target.innerHTML = `<img src='${circle}'>`;
         }
-        setBoard(updatedBoard);
-        setCount(count + 1); 
 
+        //check for win or stalemate
         if (!checkWin(updatedBoard) && count === 8) {
             titleRef.current.innerHTML = "Oops it's a draw...try again!";
                 setGameOver(true); 
@@ -62,46 +68,26 @@ function TicTacToe() {
         
     }
 
+    //checks if there is a win and writes congrats message if a win is found
     const checkWin = (board) => {
-        console.log("hi")
-        if (board[0] != "" && board[0] == board[1] && board[1] == board[2]) {
-            won(0, 1, 2); 
-            return true; 
-        } else if (board[3] !== "" && board[3] === board[4] && board[4] === board[5]) {
-            won(3, 4, 5); 
-            return true; 
-        } else if (board[6] !== "" && board[6] === board[7] && board[7] === board[8]) {
-            won(6, 7, 8);
-            return true; 
-        } else if (board[0] !== "" && board[0] === board[3] && board[3] === board[6]) {
-            won(0, 3, 6); 
-            return true; 
-        } else if (board[1] !== "" && board[1] === board[4] && board[4] === board[7]) {
-            won(1, 4, 7); 
-            return true; 
-        } else if (board[2] !== "" && board[2] === board[5] && board[5] === board[8]) {
-            won(2, 5, 8); 
-            return true; 
-        } else if (board[0] !== "" && board[0] === board[4] && board[4] === board[8]) {
-            won(0, 4, 8); 
-            return true; 
-        } else if (board[2] !== "" && board[2] === board[4] && board[4] === board[6]) {
-            won(2, 4, 6); 
-            return true; 
-        } else {
-            return false; 
-        }
+        WIN_CONDITIONS.forEach((triplet) => {
+            const [x, y, z] = triplet; 
+            if (board[x] && board[x] === board[y] && board[y] === board[z]) {
+                setGameOver(true); 
+
+                if (board[x] === 'x') {
+                    titleRef.current.innerHTML = "Congrats X won this round!";
+                } else {
+                    titleRef.current.innerHTML = "Congrats O won this round!";
+                }
+
+                return true; 
+            }
+        })
+
+        return false; 
     }
 
-    const won = (a, b, c) => {
-        setGameOver(true); 
-
-        if (board[a] === 'x') {
-            titleRef.current.innerHTML = "Congrats X won this round!";
-        } else {
-            titleRef.current.innerHTML = "Congrats O won this round!";
-        }
-    }
 
     
     const resetBoard = () => {
