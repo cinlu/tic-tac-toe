@@ -24,12 +24,17 @@ function TicTacToe() {
         if (gameOver) {
             return 0; 
         }
-
-        if (count % 2 === 0) {
+        else if (count % 2 === 0) {
             e.target.innerHTML = `<img src='${cross}'>`;
             data[num] = "x"; 
             setCount(count + 1); 
-            titleRef.current.innerHTML = "it's O's turn now";
+
+            if (count === 8 && !checkWin()) {
+                titleRef.current.innerHTML = "Oops it's a draw...try again!";
+                setGameOver(true); 
+            } else {
+                titleRef.current.innerHTML = "it's O's turn now";
+            }
         } else {
             e.target.innerHTML = `<img src='${circle}'>`;
             data[num] = "o"; 
@@ -43,21 +48,31 @@ function TicTacToe() {
     const checkWin = () => {
         if (data[0] != "" && data[0] == data[1] && data[1] == data[2]) {
             won(0, 1, 2); 
+            return true; 
         } else if (data[3] !== "" && data[3] === data[4] && data[4] === data[5]) {
             won(3, 4, 5); 
+            return true; 
         } else if (data[6] !== "" && data[6] === data[7] && data[7] === data[8]) {
             won(6, 7, 8);
+            return true; 
         } else if (data[0] !== "" && data[0] === data[3] && data[3] === data[6]) {
             won(0, 3, 6); 
+            return true; 
         } else if (data[1] !== "" && data[1] === data[4] && data[4] === data[7]) {
             won(1, 4, 7); 
+            return true; 
         } else if (data[2] !== "" && data[2] === data[5] && data[5] === data[8]) {
             won(2, 5, 8); 
+            return true; 
         } else if (data[0] !== "" && data[0] === data[4] && data[4] === data[8]) {
             won(0, 4, 8); 
+            return true; 
         } else if (data[2] !== "" && data[2] === data[4] && data[4] === data[6]) {
             won(2, 4, 6); 
-        } 
+            return true; 
+        } else {
+            return false; 
+        }
     }
 
     const won = (a, b, c) => {
@@ -73,6 +88,7 @@ function TicTacToe() {
     
     const resetBoard = () => {
         setGameOver(false); 
+        setCount(0); 
         data = ["", "", "", "", "", "", "", "", ""];
         titleRef.current.innerHTML = "make your move!";
         box_array.map((box) => {
