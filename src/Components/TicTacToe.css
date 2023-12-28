@@ -11,14 +11,15 @@
     align-items: center;
 }
 
-.congrats-msg {
+.msg {
     color: skyblue;
 }
 
 .board {
+    display: grid;
+    grid-template-columns: repeat(3, 108px);
     justify-content: center;
     align-items: center;
-    display: flex;
     margin: auto;
 }
 
