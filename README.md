@@ -7,8 +7,5 @@ This is a simple web app created with React JS that allows the user to play Tic 
 1. npm install && start
 
 
-# Current To Do's 
-
-- Change tab icon 
-- Refactor so that the board is maintained by a state 
+# Future To Do's 
 - Extra: highlight winning cells, play against a bot 
