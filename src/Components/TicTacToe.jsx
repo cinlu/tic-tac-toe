@@ -88,7 +88,7 @@ function TicTacToe() {
         <p className='msg' ref={titleRef}> make your move! </p>
         <div className="board">
             {board.map((value, index) => {
-                return <Box value={value} onClick = {() => value === "" && handleBoxClick(index)} />;
+                return <Box key={index} value={value} onClick = {() => value === "" && handleBoxClick(index)} />;
             }) 
             }
         </div>
