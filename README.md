@@ -1,9 +1,10 @@
 # Project Introduction 
+This is a web app created with React JS that allows the user to play a game
+called Tic Tac Toe. 
 
-This is a simple web app created with React JS that allows the user to play Tic Tac Toe. 
+UseState, UseRef
 
 # Instructions
-
 1. npm install && start
 
 
